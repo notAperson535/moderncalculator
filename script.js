@@ -6,13 +6,13 @@ class Calculator {
   }
 
   clear() {
-    this.currentOperand = ''
+    this.currentOperand = '0'
     this.previousOperand = ''
     this.operation = undefined
   }
 
   clearEntry() {
-    this.currentOperand = ''
+    this.currentOperand = '0'
   }
 
   delete() {
@@ -37,7 +37,7 @@ class Calculator {
     }
     this.operation = operation
     this.previousOperand = this.currentOperand
-    this.currentOperand = ''
+    this.currentOperand = '0'
   }
 
   compute() {
