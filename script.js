@@ -11,6 +11,10 @@ class Calculator {
     this.operation = undefined
   }
 
+  clearEntry() {
+    this.currentOperand = ''
+  }
+
   delete() {
     this.currentOperand = this.currentOperand.toString().slice(0, -1)
   }
@@ -97,6 +101,7 @@ const operationButtons = document.querySelectorAll('[data-operation]')
 const equalsButton = document.querySelector('[data-equals]')
 const deleteButton = document.querySelector('[data-delete]')
 const allClearButton = document.querySelector('[data-all-clear]')
+const clearEntryButton = document.querySelector('[data-clear-entry]')
 const previousOperandTextElement = document.querySelector('[data-previous-operand]')
 const currentOperandTextElement = document.querySelector('[data-current-operand]')
 
@@ -126,6 +131,11 @@ allClearButton.addEventListener('click', button => {
   calculator.updateDisplay()
 })
 
+allClearButton.addEventListener('click', button => {
+  calculator.clearEntry()
+  calculator.updateDisplay()
+})
+
 deleteButton.addEventListener('click', button => {
   calculator.delete()
   calculator.updateDisplay()
@@ -146,7 +156,12 @@ document.addEventListener('keydown', function (event) {
   }
   if (event.key.match(patternForOperators)) {
     event.preventDefault();
+    if(event.key === "/"){
+      calculator.chooseOperation("÷")
+    }
+    else{
     calculator.chooseOperation(event.key)
+    }
     calculator.updateDisplay()
   }
   if (event.key === 'Enter' || event.key === '=') {
@@ -160,6 +175,11 @@ document.addEventListener('keydown', function (event) {
     calculator.updateDisplay()
   }
   if (event.key == 'Delete') {
+    event.preventDefault();
+    calculator.clearEntry()
+    calculator.updateDisplay()
+  }
+  if (event.key == 'Escape') {
     event.preventDefault();
     calculator.clear()
     calculator.updateDisplay()
